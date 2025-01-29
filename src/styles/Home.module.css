@@ -1,0 +1,60 @@
+.header {
+  font-size: 2rem;
+  margin: 3rem auto;
+  text-align: center;
+}
+
+.shopAll {
+  display: flex;
+  justify-content: center;
+
+  background-image: url(/src/assets/images/welcome-bg.jpg);
+  background-color: #0d0a0b;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  padding-top: 20rem;
+  padding-bottom: 3rem;
+  margin: 3rem;
+}
+
+.cardsFlex {
+  margin: 3rem;
+  display: flex;
+  gap: 15px;
+}
+
+.card {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  background-color: #0d0a0b;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 25rem;
+  padding-bottom: 3rem;
+}
+
+.womens {
+  composes: card;
+  background-image: url("../assets/images/womens-clothing.jpg");
+  background-position: top;
+}
+
+.mens {
+  composes: card;
+  background-image: url("../assets/images/mens-clothing.jpg");
+}
+
+.electronics {
+  composes: card;
+  background-image: url("../assets/images/electronics.jpg");
+}
+
+.jewelry {
+  composes: card;
+  background-image: url("../assets/images/jewelry.jpg");
+  background-position: bottom;
+}
