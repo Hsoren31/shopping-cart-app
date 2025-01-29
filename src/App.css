@@ -1,28 +1,17 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  color: #0d0a0b;
 }
 
-#product_map {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 10px;
-}
-
-.product {
-  border: 1px solid black;
-}
-
-img {
-  max-width: 100px;
-  max-height: 125px;
-  display: block;
-  margin: 0 auto;
-}
-
-.row {
+nav,
+nav > ul {
   display: flex;
+  padding: 0 20px;
+}
+
+ul {
+  list-style-type: none;
+  gap: 15px;
+  margin-left: auto;
 }
