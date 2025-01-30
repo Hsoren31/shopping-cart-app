@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import styles from "../styles/Shop.module.css";
 
 const useProducts = () => {
   const [products, setProducts] = useState(null);
@@ -30,7 +31,7 @@ function Shop() {
   if (error) return <p>A network error was encountered</p>;
 
   return (
-    <div id="product_map">
+    <div className={styles.productGrid}>
       {products.map((product) => (
         <ProductCard {...product} key={product.id} />
       ))}
