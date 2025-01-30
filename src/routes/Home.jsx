@@ -10,7 +10,7 @@ function Home() {
       </div>
       <section className={styles.cardsFlex}>
         <div className={styles.womens}>
-          <button>Shop All</button>
+          <button>Shop Women's</button>
         </div>
         <div className={styles.mens}>
           <button>Shop Men's</button>
