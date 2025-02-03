@@ -1,7 +1,14 @@
 import { Outlet, Link } from "react-router-dom";
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = ({ product }) => {
+    setCartItems([...cartItems, product]);
+  };
+
   return (
     <>
       <nav>
@@ -19,7 +26,7 @@ function App() {
         </ul>
       </nav>
       <div id="pages">
-        <Outlet />
+        <Outlet context={{ cartItems, setCartItems, addToCart }} />
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import styles from "../styles/Shop.module.css";
+import { useOutletContext } from "react-router-dom";
 
 const useProducts = () => {
   const [products, setProducts] = useState(null);
@@ -26,6 +27,7 @@ const useProducts = () => {
 
 function Shop() {
   const { products, error, loading } = useProducts();
+  const { addToCart } = useOutletContext();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>A network error was encountered</p>;
@@ -33,7 +35,7 @@ function Shop() {
   return (
     <div className={styles.productGrid}>
       {products.map((product) => (
-        <ProductCard {...product} key={product.id} />
+        <ProductCard product={product} key={product.id} addToCart={addToCart} />
       ))}
     </div>
   );
