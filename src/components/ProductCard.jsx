@@ -13,6 +13,7 @@ function ProductCard({ product, addToCart }) {
       <button
         onClick={() => {
           addToCart({ product });
+          product.quantity += 1;
         }}
         className={styles.addToCartBtn}
       >

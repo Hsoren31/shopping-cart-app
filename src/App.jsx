@@ -3,10 +3,14 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartContents, setCartContents] = useState({ items: [], quantity: 0 });
 
   const addToCart = ({ product }) => {
-    setCartItems([...cartItems, product]);
+    const newValue = {
+      items: [...cartContents.items, product],
+      quantity: cartContents.quantity + 1,
+    };
+    setCartContents(newValue);
   };
 
   return (
@@ -21,12 +25,18 @@ function App() {
             <Link to={"shop"}>Shop</Link>
           </li>
           <li>
-            <Link to={"cart"}>Cart</Link>
+            <Link to={"cart"}>Cart ({cartContents.quantity})</Link>
           </li>
         </ul>
       </nav>
       <div id="pages">
-        <Outlet context={{ cartItems, setCartItems, addToCart }} />
+        <Outlet
+          context={{
+            cartContents,
+            setCartContents,
+            addToCart,
+          }}
+        />
       </div>
     </>
   );

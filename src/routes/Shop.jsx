@@ -17,7 +17,15 @@ const useProducts = () => {
 
         return response.json();
       })
-      .then((response) => setProducts(response))
+      .then((response) => {
+        let results = response.map((item) => {
+          return {
+            ...item,
+            quantity: 0,
+          };
+        });
+        setProducts(results);
+      })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, []);
