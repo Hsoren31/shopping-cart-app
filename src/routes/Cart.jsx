@@ -4,7 +4,7 @@ import { useOutletContext } from "react-router-dom";
 import CartItem from "../components/CartItem.jsx";
 
 function Cart() {
-  const { cartContents } = useOutletContext();
+  const { cartContents, formatPrice } = useOutletContext();
   const shippingCost = 10;
 
   if (cartContents.quantity > 0) {
@@ -19,15 +19,15 @@ function Cart() {
           <h2>Order Summary</h2>
           <div className={styles.row}>
             <p>{cartContents.quantity + " items"}</p>
-            <p>{"$" + cartContents.price}</p>
+            <p>{"$" + formatPrice(cartContents.price)}</p>
           </div>
           <div className={styles.row}>
             <p>Standard Shipping</p>
-            <p>{"$" + shippingCost}</p>
+            <p>{"$" + formatPrice(shippingCost)}</p>
           </div>
           <div className={styles.row}>
             <p>Subtotal</p>
-            <p>{"$" + (shippingCost + cartContents.price)}</p>
+            <p>{"$" + formatPrice(shippingCost + cartContents.price)}</p>
           </div>
           <button className={styles.checkout}>Checkout</button>
         </div>

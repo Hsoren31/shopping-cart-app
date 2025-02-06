@@ -1,6 +1,8 @@
 import styles from "../styles/Shop.module.css";
+import { useOutletContext } from "react-router-dom";
 
 function ProductCard({ product, addToCart }) {
+  const { formatPrice } = useOutletContext();
   return (
     <div className={styles.product}>
       <div>
@@ -8,7 +10,7 @@ function ProductCard({ product, addToCart }) {
       </div>
       <p className={styles.title}>{product.title}</p>
 
-      <p className={styles.price}>{"$" + product.price}</p>
+      <p className={styles.price}>{"$" + formatPrice(product.price)}</p>
 
       <button
         onClick={() => {

@@ -35,7 +35,7 @@ const useProducts = () => {
 
 function Shop() {
   const { products, error, loading } = useProducts();
-  const { addToCart } = useOutletContext();
+  const { addToCart, formatPrice } = useOutletContext();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>A network error was encountered</p>;

@@ -3,7 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import styles from "../styles/Cart.module.css";
 function CartItem({ product }) {
   const basePrice = product.price;
-  const { cartContents, setCartContents } = useOutletContext();
+  const { cartContents, setCartContents, formatPrice } = useOutletContext();
   const [productValue, setProductValue] = useState({
     quantity: product.quantity,
     price: product.price,
@@ -72,7 +72,7 @@ function CartItem({ product }) {
         />
         <button onClick={increase}>+</button>
       </div>
-      <p>{"$" + productValue.price}</p>
+      <p>{"$" + formatPrice(productValue.price)}</p>
       <button onClick={remove}>Remove</button>
     </div>
   );

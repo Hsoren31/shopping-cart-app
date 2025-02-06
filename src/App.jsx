@@ -9,6 +9,13 @@ function App() {
     price: 0,
   });
 
+  const formatPrice = (num) => {
+    return num.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   const addToCart = ({ product }) => {
     const newValue = {
       items: [...cartContents.items, product],
@@ -40,6 +47,7 @@ function App() {
             cartContents,
             setCartContents,
             addToCart,
+            formatPrice,
           }}
         />
       </div>
