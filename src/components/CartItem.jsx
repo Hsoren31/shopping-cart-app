@@ -13,10 +13,12 @@ function CartItem({ product }) {
     const value = Number(event.target.value);
     const difference = productValue.quantity - value;
     const newValue = { quantity: value, price: value * basePrice };
+    const diffCost = newValue.price - productValue.price;
     setProductValue(newValue);
     setCartContents({
       ...cartContents,
       quantity: cartContents.quantity - difference,
+      price: cartContents.price + diffCost,
     });
   };
 
@@ -26,7 +28,11 @@ function CartItem({ product }) {
       price: (productValue.quantity - 1) * basePrice,
     };
     setProductValue(newValue);
-    setCartContents({ ...cartContents, quantity: cartContents.quantity - 1 });
+    setCartContents({
+      ...cartContents,
+      quantity: cartContents.quantity - 1,
+      price: cartContents.price - basePrice,
+    });
   };
 
   const increase = () => {
@@ -35,7 +41,11 @@ function CartItem({ product }) {
       price: (productValue.quantity + 1) * basePrice,
     };
     setProductValue(newValue);
-    setCartContents({ ...cartContents, quantity: cartContents.quantity + 1 });
+    setCartContents({
+      ...cartContents,
+      quantity: cartContents.quantity + 1,
+      price: cartContents.price + basePrice,
+    });
   };
 
   const remove = () => {
@@ -44,6 +54,7 @@ function CartItem({ product }) {
     setCartContents({
       items: filteredOut,
       quantity: cartContents.quantity - productValue.quantity,
+      price: cartContents.price - productValue.price,
     });
   };
 

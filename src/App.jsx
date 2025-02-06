@@ -3,12 +3,17 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [cartContents, setCartContents] = useState({ items: [], quantity: 0 });
+  const [cartContents, setCartContents] = useState({
+    items: [],
+    quantity: 0,
+    price: 0,
+  });
 
   const addToCart = ({ product }) => {
     const newValue = {
       items: [...cartContents.items, product],
       quantity: cartContents.quantity + 1,
+      price: cartContents.price + product.price,
     };
     setCartContents(newValue);
   };
