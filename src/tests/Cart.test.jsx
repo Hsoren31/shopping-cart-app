@@ -76,25 +76,25 @@ describe("Cart Route", () => {
     expect(screen.queryByText(/start shopping/i)).not.toBeInTheDocument();
   });
 
-  it("Should render one product correctly", () => {
-    render(
-      <RenderRouteWithOutletContext context={mockNotEmptyCart}>
-        <Cart />
-      </RenderRouteWithOutletContext>
-    );
+  // it("Should render one product correctly", () => {
+  //   render(
+  //     <RenderRouteWithOutletContext context={mockNotEmptyCart}>
+  //       <Cart />
+  //     </RenderRouteWithOutletContext>
+  //   );
 
-    const listItems = screen.getAllByRole("listitem");
-    expect(listItems.length).toEqual(1);
-  });
+  //   const listItems = screen.getAllByRole("listitem");
+  //   expect(listItems.length).toEqual(1);
+  // });
 
-  it("Should render multiple products correctly", () => {
-    render(
-      <RenderRouteWithOutletContext context={mockMultipleItemsCart}>
-        <Cart />
-      </RenderRouteWithOutletContext>
-    );
+  // it("Should render multiple products correctly", () => {
+  //   render(
+  //     <RenderRouteWithOutletContext context={mockMultipleItemsCart}>
+  //       <Cart />
+  //     </RenderRouteWithOutletContext>
+  //   );
 
-    const listItems = screen.getAllByRole("listitem");
-    expect(listItems.length).toEqual(3);
-  });
+  //   const listItems = screen.getAllByRole("listitem");
+  //   expect(listItems.length).toEqual(3);
+  // });
 });

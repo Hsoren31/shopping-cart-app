@@ -59,7 +59,7 @@ function CartItem({ product }) {
   };
 
   return (
-    <div className={styles.item}>
+    <li className={styles.item}>
       <img className={styles.image} src={product.image} alt={product.title} />
       <h3 className={styles.title}>{product.title}</h3>
       <div className={styles.quantity}>
@@ -74,7 +74,7 @@ function CartItem({ product }) {
       </div>
       <p>{"$" + formatPrice(productValue.price)}</p>
       <button onClick={remove}>Remove</button>
-    </div>
+    </li>
   );
 }
 

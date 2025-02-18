@@ -10,11 +10,11 @@ function Cart() {
   if (cartContents.quantity > 0) {
     return (
       <div className={styles.cart}>
-        <div className={styles.cartItems}>
+        <ul className={styles.cartItems}>
           {cartContents.items.map((product) => (
             <CartItem product={product} key={product.id} />
           ))}
-        </div>
+        </ul>
         <div className={styles.orderSummary}>
           <h2>Order Summary</h2>
           <div className={styles.row}>
