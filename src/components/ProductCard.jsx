@@ -1,4 +1,5 @@
 import styles from "../styles/Shop.module.css";
+import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
 
 function ProductCard({ product, addToCart }) {
@@ -16,6 +17,7 @@ function ProductCard({ product, addToCart }) {
         onClick={() => {
           addToCart({ product });
           product.quantity += 1;
+          product.priceInCart = product.price;
         }}
         className={styles.addToCartBtn}
       >
@@ -24,5 +26,10 @@ function ProductCard({ product, addToCart }) {
     </div>
   );
 }
+
+ProductCard.propTypes = {
+  product: PropTypes.object,
+  addToCart: PropTypes.func,
+};
 
 export default ProductCard;
