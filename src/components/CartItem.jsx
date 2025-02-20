@@ -1,50 +1,59 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
 import styles from "../styles/Cart.module.css";
-function CartItem({ product }) {
-  const basePrice = product.price;
-  const { cartContents, setCartContents, formatPrice } = useOutletContext();
-  const [productValue, setProductValue] = useState({
-    quantity: product.quantity,
-    price: product.price,
-  });
 
+function getNewItemArr(oldProduct, newProduct, array) {
+  const productIndex = array.findIndex((item) => item === oldProduct);
+  array.splice(productIndex, 1);
+  array.splice(productIndex, 0, newProduct);
+  return array;
+}
+
+function CartItem({ product }) {
+  const { cartContents, setCartContents, formatPrice } = useOutletContext();
   const handleChange = (event) => {
     const value = Number(event.target.value);
-    const difference = productValue.quantity - value;
-    const newValue = { quantity: value, price: value * basePrice };
-    const diffCost = newValue.price - productValue.price;
-    setProductValue(newValue);
+    const newPrice = value * product.price;
+    const quantityDifference = product.quantity - value;
+    const costDifference = newPrice - product.priceInCart;
+    const newProductValue = {
+      ...product,
+      quantity: value,
+      priceInCart: newPrice,
+    };
+    getNewItemArr(product, newProductValue, cartContents.items);
     setCartContents({
-      ...cartContents,
-      quantity: cartContents.quantity - difference,
-      price: cartContents.price + diffCost,
+      items: cartContents.items,
+      quantity: cartContents.quantity - quantityDifference,
+      price: cartContents.price + costDifference,
     });
   };
 
   const decrease = () => {
-    const newValue = {
-      quantity: productValue.quantity - 1,
-      price: (productValue.quantity - 1) * basePrice,
+    const newProductValue = {
+      ...product,
+      quantity: product.quantity - 1,
+      priceInCart: (product.quantity - 1) * product.price,
     };
-    setProductValue(newValue);
+    getNewItemArr(product, newProductValue, cartContents.items);
     setCartContents({
-      ...cartContents,
+      items: cartContents.items,
       quantity: cartContents.quantity - 1,
-      price: cartContents.price - basePrice,
+      price: cartContents.price - product.price,
     });
   };
 
   const increase = () => {
-    const newValue = {
-      quantity: productValue.quantity + 1,
-      price: (productValue.quantity + 1) * basePrice,
+    const newProductValue = {
+      ...product,
+      quantity: product.quantity + 1,
+      priceInCart: (product.quantity + 1) * product.price,
     };
-    setProductValue(newValue);
+    getNewItemArr(product, newProductValue, cartContents.items);
     setCartContents({
-      ...cartContents,
+      items: cartContents.items,
       quantity: cartContents.quantity + 1,
-      price: cartContents.price + basePrice,
+      price: cartContents.price + product.price,
     });
   };
 
@@ -53,11 +62,10 @@ function CartItem({ product }) {
 
     setCartContents({
       items: filteredOut,
-      quantity: cartContents.quantity - productValue.quantity,
-      price: cartContents.price - productValue.price,
+      quantity: cartContents.quantity - product.quantity,
+      price: cartContents.price - product.priceInCart,
     });
   };
-
   return (
     <li className={styles.item}>
       <img className={styles.image} src={product.image} alt={product.title} />
@@ -65,17 +73,24 @@ function CartItem({ product }) {
       <div className={styles.quantity}>
         <button onClick={decrease}>-</button>
         <input
+          aria-label="quantity"
           type="number"
           min="1"
-          value={productValue.quantity}
+          value={product.quantity}
           onChange={handleChange}
         />
         <button onClick={increase}>+</button>
       </div>
-      <p>{"$" + formatPrice(productValue.price)}</p>
+      <p>{"$" + formatPrice(product.priceInCart)}</p>
       <button onClick={remove}>Remove</button>
     </li>
   );
 }
+
+CartItem.propTypes = {
+  cartContents: PropTypes.object,
+  product: PropTypes.object,
+  formatPrice: PropTypes.func,
+};
 
 export default CartItem;
