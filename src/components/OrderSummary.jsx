@@ -1,8 +1,10 @@
+import PropTypes from "prop-types";
 import styles from "../styles/Cart.module.css";
-import { useOutletContext } from "react-router-dom";
+import { ShopContext } from "./ShopContext";
+import { useContext } from "react";
 
 function OrderSummary({ shippingCost }) {
-  const { cartContents, formatPrice } = useOutletContext();
+  const { cartContents, formatPrice } = useContext(ShopContext);
   return (
     <div className={styles.orderSummary}>
       <h2>Order Summary</h2>
@@ -22,5 +24,9 @@ function OrderSummary({ shippingCost }) {
     </div>
   );
 }
+
+OrderSummary.propTypes = {
+  shippingCost: PropTypes.number,
+};
 
 export default OrderSummary;

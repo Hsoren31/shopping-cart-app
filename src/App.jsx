@@ -1,6 +1,39 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar";
+import { ShopContext } from "./components/ShopContext";
+
+const useProducts = () => {
+  const [products, setProducts] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products", { mode: "cors" })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("server error");
+        }
+
+        return response.json();
+      })
+      .then((response) => {
+        let results = response.map((item) => {
+          return {
+            ...item,
+            quantity: 0,
+            priceInCart: 0,
+          };
+        });
+        setProducts(results);
+      })
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { products, error, loading };
+};
 
 function App() {
   const [cartContents, setCartContents] = useState({
@@ -8,6 +41,11 @@ function App() {
     quantity: 0,
     price: 0,
   });
+
+  const { products, error, loading } = useProducts();
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>A network error was encountered</p>;
 
   const formatPrice = (num) => {
     return num.toLocaleString(undefined, {
@@ -26,32 +64,18 @@ function App() {
   };
 
   return (
-    <>
-      <nav>
-        <h2>Shop Store Fake</h2>
-        <ul>
-          <li>
-            <Link to={"home"}>Home</Link>
-          </li>
-          <li>
-            <Link to={"shop"}>Shop</Link>
-          </li>
-          <li>
-            <Link to={"cart"}>Cart ({cartContents.quantity})</Link>
-          </li>
-        </ul>
-      </nav>
-      <div id="pages">
-        <Outlet
-          context={{
-            cartContents,
-            setCartContents,
-            addToCart,
-            formatPrice,
-          }}
-        />
-      </div>
-    </>
+    <ShopContext.Provider
+      value={{
+        cartContents,
+        setCartContents,
+        products,
+        addToCart,
+        formatPrice,
+      }}
+    >
+      <Navbar />
+      <Outlet />
+    </ShopContext.Provider>
   );
 }
 

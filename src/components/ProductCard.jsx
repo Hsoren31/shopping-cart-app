@@ -1,9 +1,7 @@
 import styles from "../styles/Shop.module.css";
 import PropTypes from "prop-types";
-import { useOutletContext } from "react-router-dom";
 
-function ProductCard({ product, addToCart }) {
-  const { formatPrice } = useOutletContext();
+function ProductCard({ product, addToCart, formatPrice }) {
   return (
     <div className={styles.product}>
       <div>
@@ -30,6 +28,7 @@ function ProductCard({ product, addToCart }) {
 ProductCard.propTypes = {
   product: PropTypes.object,
   addToCart: PropTypes.func,
+  formatPrice: PropTypes.func,
 };
 
 export default ProductCard;

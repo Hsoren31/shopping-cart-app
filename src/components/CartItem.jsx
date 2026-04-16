@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import { useOutletContext } from "react-router-dom";
 import styles from "../styles/Cart.module.css";
+import { ShopContext } from "../components/ShopContext.jsx";
+import { useContext } from "react";
 
 function getNewItemArr(oldProduct, newProduct, array) {
   const productIndex = array.findIndex((item) => item === oldProduct);
@@ -10,7 +11,8 @@ function getNewItemArr(oldProduct, newProduct, array) {
 }
 
 function CartItem({ product }) {
-  const { cartContents, setCartContents, formatPrice } = useOutletContext();
+  const { cartContents, setCartContents, formatPrice } =
+    useContext(ShopContext);
   const handleChange = (event) => {
     const value = Number(event.target.value);
     const newPrice = value * product.price;
@@ -73,7 +75,7 @@ function CartItem({ product }) {
       <div className={styles.quantity}>
         <button onClick={decrease}>-</button>
         <input
-          aria-label="quantity"
+          aria-label="quantityInput"
           type="number"
           min="1"
           value={product.quantity}
