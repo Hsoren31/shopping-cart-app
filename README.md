@@ -2,7 +2,7 @@
 <img width="1906" height="923" alt="Shopping-cart-screenshot" src="https://github.com/user-attachments/assets/dad22829-ff85-45ae-8062-3ea15a70e9eb" />
 
 ## About the Project
-  A React-based mock shopping cart application that simulates a simple e-commerce experiece. Users can browse products from an external API, add items to their cart, and manage quantites with real-time updates. The project highlights routing, state management, testing, and clean component design within a single-page application. This project is part of the [Odin Project](https://www.theodinproject.com)
+  A React-based mock shopping cart application that simulates a simple e-commerce experience. Users can browse products from an external API, add items to their cart, and manage quantites with real-time updates. The project highlights routing, state management, testing, and clean component design within a single-page application. This project is part of the [Odin Project](https://www.theodinproject.com)
   
   ### Built With
   - React
